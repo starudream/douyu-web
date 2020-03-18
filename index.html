@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>斗鱼助手</title>
+    <link rel="stylesheet" href="./weui.min.css">
     <style type="text/css">
         html, body, #app {
             margin: 0;
@@ -21,8 +22,8 @@
     <button id="close">停止</button>
 </div>
 
-<!-- JQuery v3.4.1 -->
-<script src="./jquery.min.js"></script>
+<!-- axios v0.19.2 -->
+<script src="./axios.min.js"></script>
 
 <script type="text/javascript">
     var R, // 房间号
@@ -221,16 +222,15 @@
     }
 
     function initGift() {
-        $.get(
-            giftURL + '/api/gift/v2/web/list?rid=' + R,
-            function (resp) {
-                if (resp != null && resp.data != null && resp.data.giftList != null) {
-                    resp.data.giftList.forEach(function (v) {
+        axios
+            .get(giftURL + '/api/gift/v2/web/list?rid=' + R)
+            .then(function (resp) {
+                if (resp.status === 200 && resp.data != null && resp.data.data != null && resp.data.data.giftList != null) {
+                    resp.data.data.giftList.forEach(function (v) {
                         giftList['a' + v.id] = { name: v.name, price: v.priceInfo.price };
                     });
                 }
-            }
-        );
+            });
     }
 
     function gift(id, pid) {
@@ -243,16 +243,15 @@
             return b;
         }
         var g = { name: '', price: 0 };
-        $.get(
-            giftURL + '/api/prop/v1/web/single?pid=' + pid,
-            function (resp) {
-                if (resp != null && resp.data != null) {
-                    g.name = resp.data.name;
-                    g.price = resp.data.price;
+        axios
+            .get(giftURL + '/api/prop/v1/web/single?pid=' + pid)
+            .then(function (resp) {
+                if (resp.status === 200 && resp.data != null && resp.data.data != null) {
+                    g.name = resp.data.data.name;
+                    g.price = resp.data.data.price;
                     giftList['b' + pid] = g;
                 }
-            }
-        );
+            });
         return g;
     }
 
@@ -286,8 +285,8 @@
         }, 0);
     }
 
-    $(document).ready(function () {
-        $('#create').click(function () {
+    (function () {
+        document.getElementById('create').onclick = function () {
             if (R == null) {
                 M = true;
                 G = true;
@@ -295,15 +294,15 @@
                 R = '485503';
                 create();
             }
-        });
+        };
 
-        $('#close').click(function () {
+        document.getElementById('close').onclick = function () {
             if (R != null) {
                 R = null;
                 close();
             }
-        });
-    });
+        };
+    })();
 </script>
 
 </body>
