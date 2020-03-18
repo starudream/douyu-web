@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f5f6f7;
             font-size: 14px;
+            line-height: 30px;
         }
 
         #app {
@@ -23,28 +24,43 @@
             width: 100px;
         }
 
-        #msg span {
-            display: inline-block;
-        }
-
-        #msg .nn {
+        #form .form-item input, #form .form-item select {
             width: 150px;
         }
 
-        #msg .level {
-            width: 30px;
+        #msg span {
+            display: inline-block;
         }
 
         #msg .nl {
             width: 50px;
         }
 
+        #msg .nn {
+            width: 200px;
+            font-weight: bolder;
+        }
+
+        #msg .level {
+            width: 40px;
+        }
+
         #msg .bnn {
             width: 50px;
+            text-align: right;
+            margin-right: 5px;
         }
 
         #msg .bl {
-            width: 30px;
+            width: 40px;
+        }
+
+        #msg .time {
+            width: 80px;
+        }
+
+        #msg .txt {
+            font-size: 15px;
         }
     </style>
 </head>
@@ -75,9 +91,10 @@
                 <option value="500">500元</option>
             </select>
         </div>
-        <button id="start">开始</button>
-        <button id="close">停止</button>
+        <button id="start" disabled>开始</button>
+        <button id="close" disabled>停止</button>
     </div>
+    <hr>
     <div id="msg"></div>
 </div>
 
@@ -315,7 +332,7 @@
             .then(function (resp) {
                 if (resp.status === 200 && resp.data != null && resp.data.data != null) {
                     g.name = resp.data.data.name;
-                    g.price = resp.data.data.price;
+                    g.price = parseInt(resp.data.data.price);
                     giftList['b' + pid] = g;
                 }
             });
@@ -323,20 +340,17 @@
     }
 
     function handle(msg) {
-        if (msg == null) {
-            return;
-        }
         setTimeout(function () {
             switch (msg.type) {
                 case 'chatmsg':
-                    if (ML > -1 && msg.level >= ML) {
+                    if (ML > -1 && parseInt(msg.level) >= ML) {
                         addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, msg.txt);
                     }
                     break;
                 case 'dgb':
                     if (GL > -1 && msg.bg) {
                         var g = gift(msg.gfid, msg.pid);
-                        if (g.price * msg.hits >= GL * 100) {
+                        if (g.price * parseInt(msg.hits) >= GL * 100) {
                             var txt = g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
                             addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, txt);
                         }
@@ -348,19 +362,40 @@
         }, 0);
     }
 
+    function time() {
+        var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+        if (h < 10) {
+            h = '0' + h;
+        }
+        if (m < 10) {
+            m = '0' + m;
+        }
+        if (s < 10) {
+            s = '0' + s;
+        }
+        return h + ':' + m + ':' + s;
+    }
+
     function addMsg(nn, level, nl, bnn, bl, txt) {
+        var _n = '', _b = '';
         if (nl) {
-            nl = '[' + nl + ']';
+            _n = '[' + nl + ']';
+        }
+        if (bnn) {
+            _b = '<span class="bnn">' + bnn + '</span>' + '<span class="bl">(' + bl + ')</span>';
         }
         var p = document.createElement('p');
         p.innerHTML =
-            '<span class="nn">' + nn + '</span>' +
+            '<span class="nl">' + _n + '</span>' +
             '<span class="level">(' + level + ')</span>' +
-            '<span class="nl">' + nl + '</span>' +
-            '<span class="bnn">' + bnn + '</span>' +
-            '<span class="bl">(' + bl + ')</span>' +
-            '<span>: </span>' +
-            '<span>' + txt.replace('\n', '') + '</span>';
+            '<span class="nn">' + nn + '</span>' +
+            _b + '<br>' +
+            '<span class="time">' + time() + '</span>' +
+            '<span class="txt">' + txt.replace('\n', '') + '</span>' +
+            '<hr>';
         _msg.insertBefore(p, _msg.firstChild);
     }
 
@@ -376,8 +411,9 @@
                     alert('房间号为空');
                     return;
                 }
-                ML = _danmu.value;
-                GL = _gift.value;
+                ML = parseInt(_danmu.value);
+                GL = parseInt(_gift.value);
+                _msg.innerHTML = '';
                 _start.disabled = true;
                 _close.disabled = false;
                 start();
@@ -392,6 +428,8 @@
                 close();
             }
         };
+
+        _start.disabled = false;
     })();
 </script>
 
