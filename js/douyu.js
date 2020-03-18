@@ -15,7 +15,7 @@ var giftURL = 'https://giftdouyucdn.starudream.cn';
 
 var giftList = {};
 
-var maxMessage = 1000;
+var maxMessage = 200;
 
 var c2s = 689; // Client to Server
 var s2c = 690; // Server to Client
