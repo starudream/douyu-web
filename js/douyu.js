@@ -170,9 +170,7 @@ function start() {
 function close() {
     clearInterval(alive);
     ws.send(encode({ 'type': 'logout' }));
-    setTimeout(function () {
-        ws.close();
-    }, 1000);
+    ws.close();
 }
 
 function keep() {
@@ -266,16 +264,17 @@ function time() {
 }
 
 function addMsg(nn, level, nl, bnn, bl, txt) {
-    var _n = '', _b = '';
-    if (nl) {
-        _n = '[' + nl + ']';
-    }
+    var _b = '';
     if (bnn) {
-        _b = '<span class="bnn">' + bnn + '</span>' + '<span class="bl">(' + bl + ')</span>';
+        var _bl = parseInt(bl);
+        if (_bl > 0 && _bl < 10) {
+            _bl = '0' + _bl;
+        }
+        _b = '<span class="bl">(' + _bl + ')</span>' + '<span class="bnn">' + bnn + '</span>';
     }
     var p = document.createElement('p');
     p.innerHTML =
-        '<span class="nl">' + _n + '</span>' +
+        '<span class="nl">' + nl + '</span>' +
         '<span class="level">(' + level + ')</span>' +
         '<span class="nn">' + nn + '</span>' +
         _b + '<br>' +

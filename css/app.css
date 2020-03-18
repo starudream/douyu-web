@@ -18,6 +18,7 @@ html, body {
 #msg .nl {
     width: 50px;
     text-align: center;
+    font-weight: bold;
 }
 
 #msg .nn {
@@ -30,14 +31,15 @@ html, body {
     text-align: center;
 }
 
-#msg .bnn {
-    width: 50px;
+#msg .bl {
+    width: 40px;
     text-align: right;
     margin-right: 5px;
 }
 
-#msg .bl {
-    width: 40px;
+#msg .bnn {
+    width: 50px;
+    font-weight: bold;
 }
 
 #msg .time {

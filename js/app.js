@@ -21,6 +21,7 @@ var _msg = document.getElementById('msg');
             R = _room.value;
             ML = parseInt(_danmu.value);
             GL = parseInt(_gift.value);
+            localStorage.setItem('r', _room.value);
             _msg.innerHTML = '';
             _start.disabled = true;
             _start.classList.add('layui-btn-disabled');
@@ -41,6 +42,7 @@ var _msg = document.getElementById('msg');
         }
     };
 
+    _room.value = localStorage.getItem('r');
     _start.disabled = false;
     _start.classList.remove('layui-btn-disabled');
 })();
