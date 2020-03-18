@@ -7,7 +7,8 @@ html, body {
 }
 
 #app {
-    margin: 5px;
+    margin: 15px 5px;
+    min-width: 400px;
 }
 
 #msg span {
@@ -16,6 +17,7 @@ html, body {
 
 #msg .nl {
     width: 50px;
+    text-align: center;
 }
 
 #msg .nn {
@@ -25,6 +27,7 @@ html, body {
 
 #msg .level {
     width: 40px;
+    text-align: center;
 }
 
 #msg .bnn {
@@ -38,9 +41,17 @@ html, body {
 }
 
 #msg .time {
-    width: 80px;
+    width: 90px;
 }
 
 #msg .txt {
     font-size: 15px;
+}
+
+.layui-form-label {
+    width: 60px;
+}
+
+.layui-form {
+    padding-right: 15px;
 }
