@@ -297,9 +297,9 @@ function addMsg(e, nn, level, nl, bnn, bl, txt) {
         '<span class="txt">' + txt.replace('\n', '') + '</span>' +
         '<hr>';
     e.insertBefore(p, e.firstChild);
-    msg.insertBefore(p, msg.firstChild);
+    _msg.insertBefore(p, _msg.firstChild);
     delMsg(e);
-    delMsg(msg);
+    delMsg(_msg);
 }
 
 function delMsg(e) {
