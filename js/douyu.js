@@ -134,7 +134,7 @@ function string(v) {
 }
 
 function start() {
-    console.log('房间号：' + R + '，弹幕等级：' + ML + '，礼物价值：' + GL);
+    console.log('房间号：' + R + '，弹幕等级：' + ML + '，礼物价值：' + GL + '，进入房间：' + UL);
 
     ws = new WebSocket('wss://danmuproxy.douyu.com:8502/');
 
