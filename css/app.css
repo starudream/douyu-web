@@ -44,10 +44,12 @@ html, body {
 
 .msg .time {
     width: 90px;
+    vertical-align: top;
 }
 
 .msg .txt {
     font-size: 15px;
+    width: 270px;
 }
 
 .layui-form-label {
