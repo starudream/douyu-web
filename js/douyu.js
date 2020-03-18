@@ -192,7 +192,7 @@ function initGift() {
     axios
         .get(giftURL + '/api/gift/v2/web/list?rid=' + R)
         .then(function (resp) {
-            if (resp.status === 200 && resp.data != null && resp.data.data != null && resp.data.data.giftList != null) {
+            if (resp.status === 200 && resp.data && resp.data.data && resp.data.data.giftList) {
                 resp.data.data.giftList.forEach(function (v) {
                     giftList['a' + v.id] = { name: v.name, price: v.priceInfo.price };
                 });
@@ -202,18 +202,18 @@ function initGift() {
 
 function gift(id, pid) {
     var a = giftList['a' + id];
-    if (a != null) {
+    if (a) {
         return a;
     }
     var b = giftList['b' + pid];
-    if (b != null) {
+    if (b) {
         return b;
     }
     var g = { name: id + '_' + pid, price: 0 };
     axios
         .get(giftURL + '/api/prop/v1/web/single?pid=' + pid)
         .then(function (resp) {
-            if (resp.status === 200 && resp.data != null && resp.data.data != null) {
+            if (resp.status === 200 && resp.data && resp.data.data) {
                 g.name = resp.data.data.name;
                 g.price = parseInt(resp.data.data.price);
                 giftList['b' + pid] = g;
@@ -225,19 +225,30 @@ function gift(id, pid) {
 function handle(msg) {
     setTimeout(function () {
         delMsg();
+        var nl = noble(msg.nl);
         switch (msg.type) {
             case 'chatmsg':
                 if (ML > -1 && parseInt(msg.level) >= ML) {
-                    addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, msg.txt);
+                    addMsg(msg.nn, msg.level, nl, msg.bnn, msg.bl, '[弹幕] ' + msg.txt);
                 }
                 break;
             case 'dgb':
                 if (GL > -1 && msg.bg) {
                     var g = gift(msg.gfid, msg.pid);
                     if (g.price * parseInt(msg.hits) >= GL * 100) {
-                        var txt = g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
-                        addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, txt);
+                        var txt = '[礼物] ' + g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
+                        addMsg(msg.nn, msg.level, nl, msg.bnn, msg.bl, txt);
                     }
+                }
+                break;
+            case 'anbc':
+                if (parseInt(msg.drid) === R) {
+                    addMsg(msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
+                }
+                break;
+            case 'rnewbc':
+                if (parseInt(msg.drid) === R) {
+                    addMsg(msg.unk, msg.level, nl, null, null, '[续费爵位] ' + nl);
                 }
                 break;
             default:

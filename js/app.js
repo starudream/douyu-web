@@ -13,12 +13,12 @@ var _msg = document.getElementById('msg');
 
 (function () {
     _start.onclick = function () {
-        if (R == null) {
+        if (!R) {
             if (!_room.value) {
                 layer.alert('房间号为空');
                 return;
             }
-            R = _room.value;
+            R = parseInt(_room.value);
             ML = parseInt(_danmu.value);
             GL = parseInt(_gift.value);
             localStorage.setItem('r', _room.value);
@@ -32,7 +32,7 @@ var _msg = document.getElementById('msg');
     };
 
     _close.onclick = function () {
-        if (R != null) {
+        if (R) {
             R = null;
             _start.disabled = false;
             _start.classList.remove('layui-btn-disabled');
