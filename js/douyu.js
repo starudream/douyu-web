@@ -197,6 +197,14 @@ function initGift() {
                     giftList['a' + v.id] = { name: v.name, price: v.priceInfo.price };
                 });
             }
+            [
+                'a20624', // 魔法球
+                'a20626' // 幸福券
+            ].forEach(function (v) {
+                if (giftList[v]) {
+                    giftList[v].price = 0;
+                }
+            });
         });
 }
 
@@ -209,7 +217,16 @@ function gift(id, pid) {
     if (b) {
         return b;
     }
+    if (!id) {
+        id = '0';
+    }
+    if (!pid) {
+        pid = '0';
+    }
     var g = { name: id + '_' + pid, price: 0 };
+    if (pid === '0') {
+        return g;
+    }
     axios
         .get(giftURL + '/api/prop/v1/web/single?pid=' + pid)
         .then(function (resp) {
@@ -293,7 +310,7 @@ function buildMsg(nn, level, nl, bnn, bl, txt) {
     var p = document.createElement('p');
     p.innerHTML =
         '<span class="nl">' + nl + '</span>' +
-        '<span class="level">(' + _l + ')</span>' +
+        '<span class="level">' + _l + '</span>' +
         '<span class="nn">' + nn + '</span>' +
         _b + '<br>' +
         '<span class="time">' + time() + '</span>' +
