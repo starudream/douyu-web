@@ -2,6 +2,18 @@
 
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](./LICENSE)
 
+## Feature
+
+- 弹幕
+
+- 礼物
+
+- 开通、续费爵位
+
+## Screenshot
+
+![screenshot](./screenshot/1.png)
+
 ## Module
 
 - LayUI **v2.5.6**
