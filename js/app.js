@@ -1,18 +1,3 @@
-var R, // 房间号
-    ML, // 是否开启弹幕，屏蔽等级
-    GL, // 是否开启礼物，屏蔽价格
-    UL; // 是否开启进入房间，屏蔽等级
-
-var ws, alive;
-
-var _room = document.getElementById('room');
-var _danmu = document.getElementById('danmu');
-var _gift = document.getElementById('gift');
-var _user = document.getElementById('user');
-var _start = document.getElementById('start');
-var _close = document.getElementById('close');
-var _msg = document.getElementById('msg');
-
 (function () {
     _start.onclick = function () {
         if (!R) {
@@ -25,7 +10,9 @@ var _msg = document.getElementById('msg');
             GL = parseInt(_gift.value);
             UL = parseInt(_user.value);
             localStorage.setItem('r', _room.value);
-            _msg.innerHTML = '';
+            _msg1.innerHTML = '';
+            _msg2.innerHTML = '';
+            _msg3.innerHTML = '';
             _start.disabled = true;
             _start.classList.add('layui-btn-disabled');
             _close.disabled = false;

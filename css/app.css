@@ -11,42 +11,42 @@ html, body {
     min-width: 400px;
 }
 
-#msg span {
+.msg span {
     display: inline-block;
 }
 
-#msg .nl {
+.msg .nl {
     width: 50px;
     text-align: center;
     font-weight: bold;
 }
 
-#msg .nn {
+.msg .nn {
     width: 200px;
     font-weight: bolder;
 }
 
-#msg .level {
+.msg .level {
     width: 40px;
     text-align: center;
 }
 
-#msg .bl {
+.msg .bl {
     width: 40px;
     text-align: right;
     margin-right: 5px;
 }
 
-#msg .bnn {
+.msg .bnn {
     width: 50px;
     font-weight: bold;
 }
 
-#msg .time {
+.msg .time {
     width: 90px;
 }
 
-#msg .txt {
+.msg .txt {
     font-size: 15px;
 }
 

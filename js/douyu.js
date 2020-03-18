@@ -224,12 +224,11 @@ function gift(id, pid) {
 
 function handle(msg) {
     setTimeout(function () {
-        delMsg();
         var nl = noble(msg.nl);
         switch (msg.type) {
             case 'chatmsg':
                 if (ML > -1 && parseInt(msg.level) >= ML) {
-                    addMsg(msg.nn, msg.level, nl, msg.bnn, msg.bl, '[弹幕] ' + msg.txt);
+                    addMsg(_msg1, msg.nn, msg.level, nl, msg.bnn, msg.bl, '[弹幕] ' + msg.txt);
                 }
                 break;
             case 'dgb':
@@ -237,23 +236,23 @@ function handle(msg) {
                     var g = gift(msg.gfid, msg.pid);
                     if (g.price * parseInt(msg.hits) >= GL * 100) {
                         var txt = '[礼物] ' + g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
-                        addMsg(msg.nn, msg.level, nl, msg.bnn, msg.bl, txt);
+                        addMsg(_msg2, msg.nn, msg.level, nl, msg.bnn, msg.bl, txt);
                     }
                 }
                 break;
             case 'uenter':
                 if (UL > -1 && parseInt(msg.level) >= UL) {
-                    addMsg(msg.nn, msg.level, nl, null, null, '[进入房间]');
+                    addMsg(_msg3, msg.nn, msg.level, nl, null, null, '[进入房间]');
                 }
                 break;
             case 'anbc':
                 if (parseInt(msg.drid) === R) {
-                    addMsg(msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
+                    addMsg(_msg2, msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
                 }
                 break;
             case 'rnewbc':
                 if (parseInt(msg.drid) === R) {
-                    addMsg(msg.unk, msg.level, nl, null, null, '[续费爵位] ' + nl);
+                    addMsg(_msg2, msg.unk, msg.level, nl, null, null, '[续费爵位] ' + nl);
                 }
                 break;
             default:
@@ -279,7 +278,7 @@ function time() {
     return h + ':' + m + ':' + s;
 }
 
-function addMsg(nn, level, nl, bnn, bl, txt) {
+function addMsg(e, nn, level, nl, bnn, bl, txt) {
     var _b = '';
     if (bnn) {
         var _bl = parseInt(bl);
@@ -297,16 +296,17 @@ function addMsg(nn, level, nl, bnn, bl, txt) {
         '<span class="time">' + time() + '</span>' +
         '<span class="txt">' + txt.replace('\n', '') + '</span>' +
         '<hr>';
-    _msg.insertBefore(p, _msg.firstChild);
+    e.insertBefore(p, e.firstChild);
+    delMsg(e);
 }
 
-function delMsg() {
-    if (_msg.children.length <= maxMessage) {
+function delMsg(e) {
+    if (e.children.length <= maxMessage) {
         return;
     }
     while (true) {
-        _msg.removeChild(_msg.lastChild);
-        if (_msg.children.length <= maxMessage) {
+        e.removeChild(e.lastChild);
+        if (e.children.length <= maxMessage) {
             break;
         }
     }

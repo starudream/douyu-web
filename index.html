@@ -10,81 +10,101 @@
 </head>
 <body>
 <div id="app">
-    <div class="layui-form">
-        <div class="layui-form-item">
-            <label class="layui-form-label" for="room">房间号</label>
-            <div class="layui-input-block">
-                <input type="number" class="layui-input" id="room">
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">设置</li>
+            <li>弹幕</li>
+            <li>礼物</li>
+            <li>进入房间</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="room">房间号</label>
+                        <div class="layui-input-block">
+                            <input type="number" class="layui-input" id="room">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="danmu">弹幕等级</label>
+                        <div class="layui-input-block">
+                            <select id="danmu">
+                                <option value="-1" selected>关闭</option>
+                                <option value="0">0级</option>
+                                <option value="10">10级</option>
+                                <option value="20">20级</option>
+                                <option value="30">30级</option>
+                                <option value="40" selected>40级</option>
+                                <option value="50">50级</option>
+                                <option value="60">60级</option>
+                                <option value="70">70级</option>
+                                <option value="80">80级</option>
+                                <option value="90">90级</option>
+                                <option value="100">100级</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="gift">礼物价格</label>
+                        <div class="layui-input-block">
+                            <select id="gift">
+                                <option value="-1">关闭</option>
+                                <option value="0">0元</option>
+                                <option value="6">6元</option>
+                                <option value="10">10元</option>
+                                <option value="20">20元</option>
+                                <option value="50">50元</option>
+                                <option value="100" selected>100元</option>
+                                <option value="200">200元</option>
+                                <option value="500">500元</option>
+                                <option value="1000">1000元</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="user">进入房间</label>
+                        <div class="layui-input-block">
+                            <select id="user">
+                                <option value="-1">关闭</option>
+                                <option value="0">0级</option>
+                                <option value="10">10级</option>
+                                <option value="20">20级</option>
+                                <option value="30">30级</option>
+                                <option value="40">40级</option>
+                                <option value="50">50级</option>
+                                <option value="60" selected>60级</option>
+                                <option value="70">70级</option>
+                                <option value="80">80级</option>
+                                <option value="90">90级</option>
+                                <option value="100">100级</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-disabled" id="start" disabled>开始</button>
+                            <button class="layui-btn layui-btn-disabled" id="close" disabled>停止</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label" for="danmu">弹幕等级</label>
-            <div class="layui-input-block">
-                <select id="danmu">
-                    <option value="-1">关闭</option>
-                    <option value="0">0级</option>
-                    <option value="10">10级</option>
-                    <option value="20">20级</option>
-                    <option value="30">30级</option>
-                    <option value="40">40级</option>
-                    <option value="50">50级</option>
-                    <option value="60">60级</option>
-                    <option value="70">70级</option>
-                    <option value="80">80级</option>
-                    <option value="90">90级</option>
-                    <option value="100">100级</option>
-                </select>
+            <div class="layui-tab-item">
+                <div class="msg" id="msg1"></div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label" for="gift">礼物价格</label>
-            <div class="layui-input-block">
-                <select id="gift">
-                    <option value="-1">关闭</option>
-                    <option value="0">0元</option>
-                    <option value="6">6元</option>
-                    <option value="10">10元</option>
-                    <option value="20">20元</option>
-                    <option value="50">50元</option>
-                    <option value="100">100元</option>
-                    <option value="200">200元</option>
-                    <option value="500">500元</option>
-                    <option value="1000">1000元</option>
-                </select>
+            <div class="layui-tab-item">
+                <div class="msg" id="msg2"></div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label" for="user">进入房间</label>
-            <div class="layui-input-block">
-                <select id="user">
-                    <option value="-1">关闭</option>
-                    <option value="0">0级</option>
-                    <option value="10">10级</option>
-                    <option value="20">20级</option>
-                    <option value="30">30级</option>
-                    <option value="40">40级</option>
-                    <option value="50">50级</option>
-                    <option value="60">60级</option>
-                    <option value="70">70级</option>
-                    <option value="80">80级</option>
-                    <option value="90">90级</option>
-                    <option value="100">100级</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn layui-btn-disabled" id="start" disabled>开始</button>
-                <button class="layui-btn layui-btn-disabled" id="close" disabled>停止</button>
+            <div class="layui-tab-item">
+                <div class="msg" id="msg3"></div>
             </div>
         </div>
     </div>
-    <hr>
-    <div id="msg"></div>
 </div>
 <script src="./layui/layui.js"></script>
 <script src="./js/axios.min.js"></script>
 <script src="./js/layui.js"></script>
+<script src="./js/init.js"></script>
 <script src="./js/douyu.js"></script>
 <script src="./js/app.js"></script>
 </body>

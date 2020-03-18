@@ -1,4 +1,4 @@
 (function () {
-    layui.use(['form', 'layer'], function () {
+    layui.use(['element', 'form', 'layer'], function () {
     });
 })();
