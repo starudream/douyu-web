@@ -7,9 +7,44 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>斗鱼助手</title>
     <style type="text/css">
-        html, body, #app {
+        html, body {
             margin: 0;
             padding: 0;
+            background-color: #f5f6f7;
+            font-size: 14px;
+        }
+
+        #app {
+            margin: 5px;
+        }
+
+        #form .form-item label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        #msg span {
+            display: inline-block;
+        }
+
+        #msg .nn {
+            width: 150px;
+        }
+
+        #msg .level {
+            width: 30px;
+        }
+
+        #msg .nl {
+            width: 50px;
+        }
+
+        #msg .bnn {
+            width: 50px;
+        }
+
+        #msg .bl {
+            width: 30px;
         }
     </style>
 </head>
@@ -17,8 +52,33 @@
 <body>
 
 <div id="app">
-    <button id="create">添加</button>
-    <button id="close">停止</button>
+    <div id="form">
+        <div class="form-item">
+            <label for="room">房间号</label>
+            <input type="number" id="room" value="485503">
+        </div>
+        <div class="form-item">
+            <label for="danmu">弹幕屏蔽</label>
+            <select name="danmu" id="danmu">
+                <option value="-1">关闭弹幕</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="gift">礼物屏蔽</label>
+            <select name="gift" id="gift">
+                <option value="-1">关闭礼物</option>
+                <option value="0">0元</option>
+                <option value="6">6元</option>
+                <option value="10">10元</option>
+                <option value="50">50元</option>
+                <option value="100">100元</option>
+                <option value="500">500元</option>
+            </select>
+        </div>
+        <button id="start">开始</button>
+        <button id="close">停止</button>
+    </div>
+    <div id="msg"></div>
 </div>
 
 <!-- axios v0.19.2 -->
@@ -26,9 +86,15 @@
 
 <script type="text/javascript">
     var R, // 房间号
-        M, ML = 30, // 是否开启弹幕，屏蔽等级
-        G, GL = 100, // 是否开启礼物，屏蔽价格
-        U, UL = 50; // 是否开启用户进入提示，屏蔽等级
+        ML = 30, // 是否开启弹幕，屏蔽等级
+        GL = 100; // 是否开启礼物，屏蔽价格
+
+    var _room = document.getElementById('room');
+    var _danmu = document.getElementById('danmu');
+    var _gift = document.getElementById('gift');
+    var _start = document.getElementById('start');
+    var _close = document.getElementById('close');
+    var _msg = document.getElementById('msg');
 
     var nobleList = {
         1: '骑士',
@@ -165,7 +231,9 @@
         return res;
     }
 
-    function create() {
+    function start() {
+        console.log('房间号：' + R + '，弹幕等级：' + ML + '，礼物价值：' + GL);
+
         ws = new WebSocket('wss://danmuproxy.douyu.com:8502/');
 
         ws.onopen = function () {
@@ -261,21 +329,17 @@
         setTimeout(function () {
             switch (msg.type) {
                 case 'chatmsg':
-                    if (M && msg.level >= ML) {
-                        console.log(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, msg.txt.replace('\n', ''));
+                    if (ML > -1 && msg.level >= ML) {
+                        addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, msg.txt);
                     }
                     break;
                 case 'dgb':
-                    if (G && msg.bg) {
+                    if (GL > -1 && msg.bg) {
                         var g = gift(msg.gfid, msg.pid);
                         if (g.price * msg.hits >= GL * 100) {
-                            console.log(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, g.name, msg.gfcnt, msg.hits);
+                            var txt = g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
+                            addMsg(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, txt);
                         }
-                    }
-                    break;
-                case 'uenter':
-                    if (U && msg.level >= UL) {
-                        console.log(msg.nn, msg.level, noble(msg.nl));
                     }
                     break;
                 default:
@@ -284,20 +348,47 @@
         }, 0);
     }
 
+    function addMsg(nn, level, nl, bnn, bl, txt) {
+        if (nl) {
+            nl = '[' + nl + ']';
+        }
+        var p = document.createElement('p');
+        p.innerHTML =
+            '<span class="nn">' + nn + '</span>' +
+            '<span class="level">(' + level + ')</span>' +
+            '<span class="nl">' + nl + '</span>' +
+            '<span class="bnn">' + bnn + '</span>' +
+            '<span class="bl">(' + bl + ')</span>' +
+            '<span>: </span>' +
+            '<span>' + txt.replace('\n', '') + '</span>';
+        _msg.insertBefore(p, _msg.firstChild);
+    }
+
     (function () {
-        document.getElementById('create').onclick = function () {
+        for (var i = 0; i <= 50; i++) {
+            _danmu.options.add(new Option(i + '级', i.toString()));
+        }
+
+        _start.onclick = function () {
             if (R == null) {
-                M = true;
-                G = true;
-                U = true;
-                R = '485503';
-                create();
+                R = _room.value;
+                if (!R) {
+                    alert('房间号为空');
+                    return;
+                }
+                ML = _danmu.value;
+                GL = _gift.value;
+                _start.disabled = true;
+                _close.disabled = false;
+                start();
             }
         };
 
-        document.getElementById('close').onclick = function () {
+        _close.onclick = function () {
             if (R != null) {
                 R = null;
+                _start.disabled = false;
+                _close.disabled = true;
                 close();
             }
         };
