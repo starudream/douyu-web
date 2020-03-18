@@ -10,6 +10,7 @@
             GL = parseInt(_gift.value);
             UL = parseInt(_user.value);
             localStorage.setItem('r', _room.value);
+            _msg.innerHTML = '';
             _msg1.innerHTML = '';
             _msg2.innerHTML = '';
             _msg3.innerHTML = '';

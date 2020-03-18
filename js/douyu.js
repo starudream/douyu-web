@@ -278,7 +278,7 @@ function time() {
     return h + ':' + m + ':' + s;
 }
 
-function addMsg(e, nn, level, nl, bnn, bl, txt) {
+function buildMsg(nn, level, nl, bnn, bl, txt) {
     var _b = '';
     if (bnn) {
         var _bl = parseInt(bl);
@@ -296,8 +296,12 @@ function addMsg(e, nn, level, nl, bnn, bl, txt) {
         '<span class="time">' + time() + '</span>' +
         '<span class="txt">' + txt.replace('\n', '') + '</span>' +
         '<hr>';
-    e.insertBefore(p, e.firstChild);
-    _msg.insertBefore(p, _msg.firstChild);
+    return p;
+}
+
+function addMsg(e, nn, level, nl, bnn, bl, txt) {
+    e.insertBefore(buildMsg(nn, level, nl, bnn, bl, txt), e.firstChild);
+    _msg.insertBefore(buildMsg(nn, level, nl, bnn, bl, txt), _msg.firstChild);
     delMsg(e);
     delMsg(_msg);
 }
