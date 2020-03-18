@@ -241,6 +241,11 @@ function handle(msg) {
                     }
                 }
                 break;
+            case 'uenter':
+                if (UL > -1 && parseInt(msg.level) >= UL) {
+                    addMsg(msg.nn, msg.level, nl, null, null, '[进入房间]');
+                }
+                break;
             case 'anbc':
                 if (parseInt(msg.drid) === R) {
                     addMsg(msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
