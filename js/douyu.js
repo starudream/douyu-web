@@ -279,7 +279,10 @@ function time() {
 }
 
 function buildMsg(nn, level, nl, bnn, bl, txt) {
-    var _b = '';
+    var _l = '', _b = '';
+    if (level) {
+        _l = '(' + level + ')';
+    }
     if (bnn) {
         var _bl = parseInt(bl);
         if (_bl > 0 && _bl < 10) {
@@ -290,7 +293,7 @@ function buildMsg(nn, level, nl, bnn, bl, txt) {
     var p = document.createElement('p');
     p.innerHTML =
         '<span class="nl">' + nl + '</span>' +
-        '<span class="level">(' + level + ')</span>' +
+        '<span class="level">(' + _l + ')</span>' +
         '<span class="nn">' + nn + '</span>' +
         _b + '<br>' +
         '<span class="time">' + time() + '</span>' +
