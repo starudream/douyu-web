@@ -10,15 +10,6 @@ html, body {
     margin: 5px;
 }
 
-#form .form-item label {
-    display: inline-block;
-    width: 100px;
-}
-
-#form .form-item input, #form .form-item select {
-    width: 150px;
-}
-
 #msg span {
     display: inline-block;
 }

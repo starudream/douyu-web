@@ -2,6 +2,12 @@
 
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](./LICENSE)
 
+## Module
+
+- LayUI **v2.5.6**
+
+- Axios **v0.19.2**
+
 ## Notice
 
 因为 `斗鱼礼物服务器` 限定了 `www.douyu.com` 域名。
