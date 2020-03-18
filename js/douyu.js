@@ -15,6 +15,8 @@ var giftURL = 'https://giftdouyucdn.starudream.cn';
 
 var giftList = {};
 
+var maxMessage = 1000;
+
 var c2s = 689; // Client to Server
 var s2c = 690; // Server to Client
 
@@ -209,7 +211,7 @@ function gift(id, pid) {
     if (b != null) {
         return b;
     }
-    var g = { name: '', price: 0 };
+    var g = { name: id + '_' + pid, price: 0 };
     axios
         .get(giftURL + '/api/prop/v1/web/single?pid=' + pid)
         .then(function (resp) {
@@ -224,6 +226,7 @@ function gift(id, pid) {
 
 function handle(msg) {
     setTimeout(function () {
+        delMsg();
         switch (msg.type) {
             case 'chatmsg':
                 if (ML > -1 && parseInt(msg.level) >= ML) {
@@ -280,4 +283,16 @@ function addMsg(nn, level, nl, bnn, bl, txt) {
         '<span class="txt">' + txt.replace('\n', '') + '</span>' +
         '<hr>';
     _msg.insertBefore(p, _msg.firstChild);
+}
+
+function delMsg() {
+    if (_msg.children.length <= maxMessage) {
+        return;
+    }
+    while (true) {
+        _msg.removeChild(_msg.lastChild);
+        if (_msg.children.length <= maxMessage) {
+            break;
+        }
+    }
 }
