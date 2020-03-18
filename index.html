@@ -21,12 +21,14 @@
     <button id="close">停止</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+<!-- JQuery v3.4.1 -->
+<script src="./jquery.min.js"></script>
 
 <script type="text/javascript">
-    var R, M, G, U; // 房间号，弹幕，礼物，用户
+    var R, // 房间号
+        M, ML = 30, // 是否开启弹幕，屏蔽等级
+        G, GL = 100, // 是否开启礼物，屏蔽价格
+        U, UL = 50; // 是否开启用户进入提示，屏蔽等级
 
     var nobleList = {
         1: '骑士',
@@ -258,22 +260,23 @@
         if (msg == null) {
             return;
         }
-        console.debug(msg);
         setTimeout(function () {
             switch (msg.type) {
                 case 'chatmsg':
-                    if (M) {
+                    if (M && msg.level >= ML) {
                         console.log(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, msg.txt.replace('\n', ''));
                     }
                     break;
                 case 'dgb':
                     if (G && msg.bg) {
                         var g = gift(msg.gfid, msg.pid);
-                        console.log(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, g.name, msg.gfcnt, msg.hits);
+                        if (g.price * msg.hits >= GL * 100) {
+                            console.log(msg.nn, msg.level, noble(msg.nl), msg.bnn, msg.bl, g.name, msg.gfcnt, msg.hits);
+                        }
                     }
                     break;
                 case 'uenter':
-                    if (U) {
+                    if (U && msg.level >= UL) {
                         console.log(msg.nn, msg.level, noble(msg.nl));
                     }
                     break;
@@ -286,7 +289,9 @@
     $(document).ready(function () {
         $('#create').click(function () {
             if (R == null) {
+                M = true;
                 G = true;
+                U = true;
                 R = '485503';
                 create();
             }
