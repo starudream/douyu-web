@@ -10,9 +10,7 @@
 
 - 开通、续费爵位
 
-## Screenshot
-
-![screenshot](./screenshot/1.png)
+- 进入房间
 
 ## Module
 
