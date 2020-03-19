@@ -1,6 +1,6 @@
 name: Android
 on:
-  - push
+  - release
 jobs:
   build:
     name: Build
