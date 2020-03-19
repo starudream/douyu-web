@@ -21,6 +21,8 @@
 
 ## Download
 
+- [Download Android APK from Releases](https://github.com/starudream/douyu-web/releases)
+
 - [Download Android APK from GitHub Actions Artifacts](https://github.com/starudream/douyu-web/actions)
 
 ## Notice
