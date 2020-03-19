@@ -195,11 +195,11 @@ function noble(nl) {
 }
 
 function initGift() {
-    axios
-        .get(giftURL + '/api/gift/v2/web/list?rid=' + R)
-        .then(function (resp) {
-            if (resp.status === 200 && resp.data && resp.data.data && resp.data.data.giftList) {
-                resp.data.data.giftList.forEach(function (v) {
+    $.ajax({
+        url: giftURL + '/api/gift/v2/web/list?rid=' + R,
+        success: function (resp) {
+            if (resp.data && resp.data.giftList) {
+                resp.data.giftList.forEach(function (v) {
                     giftList['a' + v.id] = { name: v.name, price: v.priceInfo.price };
                 });
             }
@@ -211,7 +211,8 @@ function initGift() {
                     giftList[v].price = 0;
                 }
             });
-        });
+        }
+    });
 }
 
 function gift(id, pid) {
@@ -233,15 +234,18 @@ function gift(id, pid) {
     if (pid === '0') {
         return g;
     }
-    axios
-        .get(giftURL + '/api/prop/v1/web/single?pid=' + pid)
-        .then(function (resp) {
-            if (resp.status === 200 && resp.data && resp.data.data) {
-                g.name = resp.data.data.name;
-                g.price = parseInt(resp.data.data.price);
+    $.ajax({
+        url: giftURL + '/api/prop/v1/web/single?pid=' + pid,
+        async: false,
+        timeout: 5000,
+        success: function (resp) {
+            if (resp && resp.data) {
+                g.name = resp.data.name;
+                g.price = parseInt(resp.data.price);
                 giftList['b' + pid] = g;
             }
-        });
+        }
+    });
     return g;
 }
 
