@@ -23,5 +23,5 @@ jobs:
           npm install -g cordova
           cordova create build
           cd build
-          cordova platform add andorid
+          cordova platform add android
           cordova build android
