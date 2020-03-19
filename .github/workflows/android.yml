@@ -26,7 +26,7 @@ jobs:
           cp -rf ./css ./js ./layui ./index.html ./LICENSE ./cordova/www
           cd cordova
           cordova platform add android
-          cordova build android --release
+          cordova build android
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
