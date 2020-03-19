@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: |
           npm install -g cordova
-          cordova create cordova
+          cordova create cordova cn.starudream.douyu 斗鱼助手
           rm -rf ./cordova/www/*
           cp -rf ./css ./js ./layui ./index.html ./LICENSE ./cordova/www
           cd cordova
