@@ -1,5 +1,6 @@
 # DouYu Web
 
+[![GithubAction](https://github.com/starudream/douyu-web/workflows/Android/badge.svg)](https://github.com/starudream/douyu-web/actions)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](./LICENSE)
 
 ## Feature
@@ -17,6 +18,10 @@
 - LayUI **v2.5.6**
 
 - Axios **v0.19.2**
+
+## Download
+
+- [Download Android APK from GitHub Actions Artifacts](https://github.com/starudream/douyu-web/actions)
 
 ## Notice
 

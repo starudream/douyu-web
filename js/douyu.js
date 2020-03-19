@@ -149,7 +149,8 @@ function start() {
     };
 
     ws.onerror = function (ev) {
-        console.error(ev);
+        close();
+        layer.alert('未知错误，请重新开始\n' + JSON.stringify(ev));
     };
 
     ws.onmessage = function (ev) {
@@ -170,6 +171,11 @@ function start() {
 function close() {
     clearInterval(alive);
     ws.send(encode({ 'type': 'logout' }));
+    R = null;
+    _start.disabled = false;
+    _start.classList.remove('layui-btn-disabled');
+    _close.disabled = true;
+    _close.classList.add('layui-btn-disabled');
     ws.close();
 }
 
