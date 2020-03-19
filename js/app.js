@@ -24,11 +24,6 @@
 
     _close.onclick = function () {
         if (R) {
-            R = null;
-            _start.disabled = false;
-            _start.classList.remove('layui-btn-disabled');
-            _close.disabled = true;
-            _close.classList.add('layui-btn-disabled');
             close();
         }
     };

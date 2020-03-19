@@ -25,6 +25,8 @@ jobs:
           rm -rf ./cordova/www/*
           cp -rf ./css ./js ./layui ./index.html ./LICENSE ./cordova/www
           cd cordova
+          sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/douyu.js
+          sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./js/douyu.js
           cordova platform add android
           cordova build android
       - name: Upload
