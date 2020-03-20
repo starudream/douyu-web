@@ -1,6 +1,8 @@
 name: Android
 on:
-  - release
+  push:
+    tags:
+      - v*.*.*
 jobs:
   build:
     name: Build
@@ -27,6 +29,7 @@ jobs:
           cd cordova
           sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./www/js/douyu.js
           sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./www/js/douyu.js
+          sed -i 's|version="1.0.0"|version="'${GITHUB_REF:11}'"|g' ./config.xml
           cordova platform add android
           cordova build android
       - name: Upload
