@@ -50,6 +50,7 @@ html, body {
 .msg .txt {
     font-size: 15px;
     width: 270px;
+    word-break: break-word;
 }
 
 .layui-form-label {
