@@ -134,23 +134,24 @@ function string(v) {
 }
 
 function start() {
-    console.log('房间号：' + R + '，弹幕等级：' + ML + '，礼物价值：' + GL + '，进入房间：' + UL);
-
     ws = new WebSocket('wss://danmuproxy.douyu.com:8502/');
 
     ws.onopen = function () {
+        initGift();
+        layer.alert('房间号：' + R + '<br>弹幕等级：' + ML + '<br>礼物价值：' + GL + '<br>进入房间：' + UL);
         ws.send(encode({ 'type': 'loginreq', 'roomid': R }));
         ws.send(encode({ 'type': 'joingroup', 'rid': R, 'gid': '-9999' }));
         keep();
-        initGift();
     };
 
     ws.onclose = function () {
+        close();
+        layer.alert('停止');
     };
 
     ws.onerror = function (ev) {
         close();
-        layer.alert('未知错误，请重新开始\n' + JSON.stringify(ev));
+        layer.alert('未知错误<br>' + JSON.stringify(ev));
     };
 
     ws.onmessage = function (ev) {
@@ -170,13 +171,15 @@ function start() {
 
 function close() {
     clearInterval(alive);
-    ws.send(encode({ 'type': 'logout' }));
+    if (ws) {
+        ws.send(encode({ 'type': 'logout' }));
+        ws.close();
+    }
     R = null;
     _start.disabled = false;
     _start.classList.remove('layui-btn-disabled');
     _close.disabled = true;
     _close.classList.add('layui-btn-disabled');
-    ws.close();
 }
 
 function keep() {
