@@ -15,9 +15,9 @@
 
 ## Module
 
-- LayUI **v2.5.6**
+- JQuery **v3.4.1**
 
-- Axios **v0.19.2**
+- LayUI **v2.5.6**
 
 ## Download
 
