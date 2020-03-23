@@ -61,7 +61,11 @@ function decodeValue(v) {
     v = v.toString();
     v = v.replace('@A', '@');
     v = v.replace('@S', '/');
-    return decodeURIComponent(escape(v));
+    try {
+        return decodeURIComponent(escape(v));
+    } catch (e) {
+        return '**解码失败**';
+    }
 }
 
 function toBuffer(bs) {
