@@ -25,16 +25,16 @@ jobs:
           npm install -g cordova
           cordova create cordova cn.starudream.douyu 斗鱼助手
           rm -rf ./cordova/www/*
-          rm -rf ./cordova/platforms/android/app/src/main/res/*dpi*
           cp -rf ./css ./js ./layui ./index.html ./LICENSE ./cordova/www
           cp -rf ./.cordova/config.xml ./cordova/config.xml
-          cp -rf ./.cordova/res/* ./cordova/platforms/android/app/src/main/res
           cd cordova
           sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./www/js/init.js
           sed -i 's|maxMessage = 200|maxMessage = 1000|g' ./www/js/init.js
           sed -i 's|version="1.0.0"|version="'${GITHUB_REF:11}'"|g' ./config.xml
           sed -i "s|version = ''|version='${GITHUB_REF:10}'|g" ./www/js/version.js
           cordova platform add android@8
+          rm -rf ./cordova/platforms/android/app/src/main/res/*dpi*
+          cp -rf ./.cordova/res/* ./cordova/platforms/android/app/src/main/res
           echo "${{secrets.ANDROID_KEY_STORE_BASE64}}" | base64 -d > ./starudream.jks
           cordova build android --release -- --keystore=./starudream.jks --storePassword=${{secrets.ANDROID_STORE_PASSWORD}} --alias=${{secrets.ANDROID_ALIAS}} --password=${{secrets.ANDROID_PASSWORD}}
       - name: Upload
