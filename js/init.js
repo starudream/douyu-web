@@ -5,6 +5,7 @@ var R, // 房间号
 
 var ws, alive, giftList = {};
 
+var githubOwnerRepo = 'starudream/douyu-web';
 var douyuWSURL = 'wss://danmuproxy.douyu.com:8501/';
 var giftURL = 'https://giftdouyucdn.starudream.cn';
 var maxMessage = 200;
@@ -30,6 +31,3 @@ var _msg = document.getElementById('msg');
 var _msg1 = document.getElementById('msg1');
 var _msg2 = document.getElementById('msg2');
 var _msg3 = document.getElementById('msg3');
-
-layui.use(['element', 'form', 'layer'], function () {
-});
