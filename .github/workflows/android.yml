@@ -33,8 +33,8 @@ jobs:
           sed -i 's|version="1.0.0"|version="'${GITHUB_REF:11}'"|g' ./config.xml
           sed -i "s|version = ''|version='${GITHUB_REF:10}'|g" ./www/js/version.js
           cordova platform add android@8
-          rm -rf ./cordova/platforms/android/app/src/main/res/*dpi*
-          cp -rf ./.cordova/res/* ./cordova/platforms/android/app/src/main/res
+          rm -rf ./platforms/android/app/src/main/res/*dpi*
+          cp -rf ../douyu-web/.cordova/res/* ./platforms/android/app/src/main/res
           echo "${{secrets.ANDROID_KEY_STORE_BASE64}}" | base64 -d > ./starudream.jks
           cordova build android --release -- --keystore=./starudream.jks --storePassword=${{secrets.ANDROID_STORE_PASSWORD}} --alias=${{secrets.ANDROID_ALIAS}} --password=${{secrets.ANDROID_PASSWORD}}
       - name: Upload
