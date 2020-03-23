@@ -4,6 +4,7 @@ var version = '';
     if (version) {
         $.ajax({
             url: 'https://api.github.com/repos/' + githubOwnerRepo + '/releases/latest',
+            cache: false,
             timeout: 5000,
             success: function (resp) {
                 if (resp.tag_name !== version && resp.assets && resp.assets.length > 0) {

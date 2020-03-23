@@ -65,6 +65,7 @@ function noble(nl) {
 function initGift() {
     $.ajax({
         url: giftURL + '/api/gift/v2/web/list?rid=' + R,
+        cache: false,
         timeout: 5000,
         success: function (resp) {
             if (resp.data && resp.data.giftList) {
