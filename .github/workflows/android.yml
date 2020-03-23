@@ -31,7 +31,7 @@ jobs:
           sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./www/js/init.js
           sed -i 's|maxMessage = 200|maxMessage = 1000|g' ./www/js/init.js
           sed -i 's|version="1.0.0"|version="'${GITHUB_REF:11}'"|g' ./config.xml
-          sed -i "s|version = ''|version='${GITHUB_REF:11}'|g" ./www/js/version.js
+          sed -i "s|version = ''|version='${GITHUB_REF:10}'|g" ./www/js/version.js
           cordova platform add android@8
           echo "${{secrets.ANDROID_KEY_STORE_BASE64}}" | base64 -d > ./starudream.jks
           cordova build android --release -- --keystore=./starudream.jks --storePassword=${{secrets.ANDROID_STORE_PASSWORD}} --alias=${{secrets.ANDROID_ALIAS}} --password=${{secrets.ANDROID_PASSWORD}}
