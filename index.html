@@ -2,11 +2,24 @@
 <html lang="zh-Hans-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta id="viewport" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>斗鱼助手</title>
     <link rel="stylesheet" href="./layui/css/layui.css">
     <link rel="stylesheet" href="./css/app.css">
+    <script>
+        var w        = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+            viewport = document.getElementById('viewport'),
+            scale    = 1;
+        if (w <= 320) {
+            scale = w / 375.00;
+        } else if (w < 395) {
+            scale = (w - 20) / 375.00;
+        }
+        if (w < 395) {
+            viewport.content = 'width=device-width, user-scalable=no, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
+        }
+    </script>
 </head>
 <body>
 <div id="app">
@@ -36,8 +49,8 @@
                                 <option value="10">10级</option>
                                 <option value="20">20级</option>
                                 <option value="30">30级</option>
-                                <option value="40">40级</option>
-                                <option value="50" selected>50级</option>
+                                <option value="40" selected>40级</option>
+                                <option value="50">50级</option>
                                 <option value="60">60级</option>
                                 <option value="70">70级</option>
                                 <option value="80">80级</option>
@@ -67,7 +80,7 @@
                         <label class="layui-form-label" for="user">进入房间</label>
                         <div class="layui-input-block">
                             <select id="user">
-                                <option value="-1">关闭</option>
+                                <option value="-1" selected>关闭</option>
                                 <option value="0">0级</option>
                                 <option value="10">10级</option>
                                 <option value="20">20级</option>
@@ -75,7 +88,7 @@
                                 <option value="40">40级</option>
                                 <option value="50">50级</option>
                                 <option value="60">60级</option>
-                                <option value="70" selected>70级</option>
+                                <option value="70">70级</option>
                                 <option value="80">80级</option>
                                 <option value="90">90级</option>
                                 <option value="100">100级</option>

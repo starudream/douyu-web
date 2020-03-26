@@ -6,11 +6,6 @@ html, body {
     line-height: 30px;
 }
 
-#app {
-    margin: 15px 5px;
-    min-width: 400px;
-}
-
 .msg span {
     display: inline-block;
 }

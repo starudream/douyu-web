@@ -28,7 +28,11 @@
         }
     };
 
-    _room.value = localStorage.getItem('r');
+    var r = localStorage.getItem('r');
+    if (r) {
+        _room.value = localStorage.getItem('r');
+    }
+
     _start.disabled = false;
     _start.classList.remove('layui-btn-disabled');
 })();
