@@ -1,4 +1,4 @@
-name: Android
+name: Cordova
 on:
   push:
     tags:
@@ -40,5 +40,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          name: douyu
+          name: cordova
           path: ./cordova/platforms/android/app/build/outputs/apk
