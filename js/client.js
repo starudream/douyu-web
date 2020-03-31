@@ -66,7 +66,7 @@ function initGift() {
     $.ajax({
         url: giftURL + '/api/gift/v2/web/list?rid=' + R,
         cache: false,
-        timeout: 5000,
+        timeout: 3000,
         success: function (resp) {
             if (resp.data && resp.data.giftList) {
                 resp.data.giftList.forEach(function (v) {
@@ -106,7 +106,8 @@ function gift(id, pid, callback) {
     }
     $.ajax({
         url: giftURL + '/api/prop/v1/web/single?pid=' + pid,
-        timeout: 5000,
+        cache: false,
+        timeout: 3000,
         complete: function (resp) {
             if (resp.status === 200) {
                 var data = resp.responseJSON;

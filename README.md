@@ -23,8 +23,6 @@
 
 - [Download Android APK from Releases](https://github.com/starudream/douyu-web/releases)
 
-- [Download Android APK from GitHub Actions Artifacts](https://github.com/starudream/douyu-web/actions)
-
 ## Notice
 
 因为 `斗鱼礼物服务器` 限定了 `www.douyu.com` 域名。
