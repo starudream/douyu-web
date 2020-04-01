@@ -1,6 +1,7 @@
 # DouYu Web
 
-[![GithubAction](https://github.com/starudream/douyu-web/workflows/Android/badge.svg)](https://github.com/starudream/douyu-web/actions)
+[![Electron](https://github.com/starudream/douyu-web/workflows/Electron/badge.svg)](https://github.com/starudream/douyu-web/actions?query=workflow%3AElectron)
+[![Cordova](https://github.com/starudream/douyu-web/workflows/Cordova/badge.svg)](https://github.com/starudream/douyu-web/actions?query=workflow%3ACordova)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](./LICENSE)
 
 ## Feature
@@ -18,10 +19,6 @@
 - JQuery **v3.4.1**
 
 - LayUI **v2.5.6**
-
-## Download
-
-- [Download Android APK from Releases](https://github.com/starudream/douyu-web/releases)
 
 ## Notice
 
