@@ -10,10 +10,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
       - name: Build
         run: |
           cp -r ./.electron ./electron
@@ -24,15 +20,10 @@ jobs:
           cp ./LICENSE ./electron
           cd electron
           npm i
-          echo 1
           ../.bin/sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/init.js
-          echo 2
           ../.bin/sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./js/init.js
-          echo 3
           $env:GITHUB_REF="refs/tags/v2.0.0"
-          echo 4
           ../.bin/sed -i (-Join('s|1.0.0|', $env:GITHUB_REF.SubString(11), '|g')) ./package.json
-          echo 5
           npm run pack
       - name: Upload
         uses: actions/upload-artifact@v1
