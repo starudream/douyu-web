@@ -11,6 +11,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Build
+        shell: powershell
         run: |
           cp -r ./.electron ./electron
           cp -r ./css ./electron
