@@ -1,0 +1,34 @@
+name: Electron
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: PrePack
+        run: |
+          cp -r ./.electron ./electron
+          cp -r ./css ./electron
+          cp -r ./js ./electron
+          cp -r ./layui ./electron
+          cp ./index.html ./electron
+          cp ./LICENSE ./electron
+          cd electron
+          npm i
+          ../.bin/sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/init.js
+          ../.bin/sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./js/init.js
+          ../.bin/sed -i (-Join('s|1.0.0|', $env:GITHUB_REF.SubString(11), '|g')) ./package.json
+      - name: Pack
+        run: npm run pack --prefix ./electron
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: electron
+          path: ./electron/build
