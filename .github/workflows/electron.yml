@@ -10,8 +10,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Build
-        shell: powershell
+      - name: PrePack
         run: |
           cp -r ./.electron ./electron
           cp -r ./css ./electron
@@ -25,7 +24,8 @@ jobs:
           ../.bin/sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./js/init.js
           $env:GITHUB_REF="refs/tags/v2.0.0"
           ../.bin/sed -i (-Join('s|1.0.0|', $env:GITHUB_REF.SubString(11), '|g')) ./package.json
-      - run: npm run pack --prefix ./electron
+      - name: Pack
+        run: npm run pack --prefix ./electron
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
