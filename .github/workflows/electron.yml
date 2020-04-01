@@ -16,8 +16,8 @@ jobs:
           node-version: 12
       - name: Build
         run: |
-          cp -rf ./.electron ./electron
-          cp -rf ./css ./js ./layui ./index.html ./LICENSE ./electron
+          cp ./.electron ./electron
+          cp ./css ./js ./layui ./index.html ./LICENSE ./electron
           cd electron
           npm i
           ../.bin/sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/init.js
