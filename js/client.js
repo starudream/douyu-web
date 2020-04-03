@@ -15,6 +15,7 @@ function start() {
     };
 
     ws.onerror = function (ev) {
+        console.log(ev);
         close();
         layer.alert('未知错误<br>' + JSON.stringify(ev));
     };

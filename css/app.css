@@ -6,45 +6,49 @@ html, body {
     line-height: 30px;
 }
 
+#app {
+    max-width: 800px;
+}
+
 .msg span {
     display: inline-block;
 }
 
 .msg .nl {
-    width: 40px;
+    width: 10.256%;
     text-align: center;
     font-weight: bold;
 }
 
-.msg .nn {
-    width: 200px;
-    font-weight: bolder;
-}
-
 .msg .level {
-    width: 40px;
+    width: 10.256%;
     text-align: center;
 }
 
+.msg .nn {
+    width: 57.692%;
+    font-weight: bolder;
+}
+
 .msg .bl {
-    width: 30px;
+    width: 7.692%;
     text-align: right;
-    margin-right: 5px;
+    margin-right: 1.282%;
 }
 
 .msg .bnn {
-    width: 50px;
+    width: 12.820%;
     font-weight: bold;
 }
 
 .msg .time {
-    width: 80px;
+    width: 20.513%;
     vertical-align: top;
 }
 
 .msg .txt {
     font-size: 15px;
-    width: 270px;
+    width: 79.487%;
     word-break: break-word;
 }
 
