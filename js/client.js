@@ -15,9 +15,8 @@ function start() {
     };
 
     ws.onerror = function (ev) {
-        console.log(ev);
         close();
-        layer.alert('未知错误<br>' + JSON.stringify(ev));
+        console.log(ev);
     };
 
     ws.onmessage = function (ev) {
@@ -124,6 +123,7 @@ function gift(id, pid, callback) {
 }
 
 function handle(msg) {
+    console.log(msg);
     setTimeout(function () {
         var t = time();
         var nl = noble(msg.nl);
