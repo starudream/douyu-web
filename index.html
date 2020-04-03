@@ -11,12 +11,12 @@
         var w        = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
             viewport = document.getElementById('viewport'),
             scale    = 1;
-        if (w <= 320) {
-            scale = w / 375.00;
-        } else if (w < 395) {
-            scale = (w - 20) / 375.00;
+        if (w <= 414) {
+            scale = w / 414.00;
+        } else if (w < 434) {
+            scale = (w - 20) / 414.00;
         }
-        if (w < 395) {
+        if (w < 434) {
             viewport.content = 'width=device-width, user-scalable=no, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale;
         }
     </script>

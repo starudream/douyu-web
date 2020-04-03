@@ -19,6 +19,7 @@ jobs:
           cp -r ./js ./electron
           cp -r ./layui ./electron
           cp ./index.html ./electron
+          cp ./favicon.ico ./electron/icon.ico
           cp ./LICENSE ./electron
           cd electron
           npm i
