@@ -14,18 +14,18 @@ jobs:
           fetch-depth: 1
       - name: PrePack
         run: |
-          cp -r ./.electron ./electron
-          cp -r ./css ./electron
-          cp -r ./js ./electron
-          cp -r ./layui ./electron
-          cp ./index.html ./electron
-          cp ./favicon.ico ./electron/icon.ico
-          cp ./LICENSE ./electron
+          copy-item -r ./.electron ./electron
+          copy-item -r ./css ./electron
+          copy-item -r ./js ./electron
+          copy-item -r ./layui ./electron
+          copy-item ./index.html ./electron
+          copy-item ./favicon.ico ./electron/icon.ico
+          copy-item ./LICENSE ./electron
           cd electron
           npm i
-          (gc -encoding utf8 ./js/init.js).replace('giftdouyucdn.starudream.cn', 'gift.douyucdn.cn') | sc -encoding utf8 ./js/init.js
-          (gc -encoding utf8 ./js/init.js).replace('maxMessage = 200', 'maxMessage = 2000') | sc -encoding utf8 ./js/init.js
-          (gc -encoding utf8 ./package.json).replace('1.0.0', $env:GITHUB_REF.SubString(11)) | sc -encoding utf8 ./package.json
+          (get-content -encoding utf8 ./js/init.js).replace('giftdouyucdn.starudream.cn', 'gift.douyucdn.cn') | set-content -encoding utf8 ./js/init.js
+          (get-content -encoding utf8 ./js/init.js).replace('maxMessage = 200', 'maxMessage = 2000') | set-content -encoding utf8 ./js/init.js
+          (get-content -encoding utf8 ./package.json).replace('1.0.0', $env:GITHUB_REF.SubString(11)) | set-content -encoding utf8 ./package.json
       - name: Pack
         run: npm run pack --prefix ./electron
       - name: Upload
