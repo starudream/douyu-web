@@ -23,9 +23,9 @@ jobs:
           cp ./LICENSE ./electron
           cd electron
           npm i
-          ../.bin/sed -i 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/init.js
-          ../.bin/sed -i 's|maxMessage = 200|maxMessage = 2000|g' ./js/init.js
-          ../.bin/sed -i (-Join('s|1.0.0|', $env:GITHUB_REF.SubString(11), '|g')) ./package.json
+          (gc -encoding utf8 ./js/init.js).replace('giftdouyucdn.starudream.cn', 'gift.douyucdn.cn') | sc -encoding utf8 ./js/init.js
+          (gc -encoding utf8 ./js/init.js).replace('maxMessage = 200', 'maxMessage = 2000') | sc -encoding utf8 ./js/init.js
+          (gc -encoding utf8 ./package.json).replace('1.0.0', $env:GITHUB_REF.SubString(11)) | sc -encoding utf8 ./package.json
       - name: Pack
         run: npm run pack --prefix ./electron
       - name: Upload

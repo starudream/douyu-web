@@ -16,7 +16,7 @@ function start() {
 
     ws.onerror = function (ev) {
         close();
-        console.log(ev);
+        console.error(ev);
     };
 
     ws.onmessage = function (ev) {
@@ -123,7 +123,6 @@ function gift(id, pid, callback) {
 }
 
 function handle(msg) {
-    console.log(msg);
     setTimeout(function () {
         var t = time();
         var nl = noble(msg.nl);
