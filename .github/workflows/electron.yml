@@ -24,7 +24,6 @@ jobs:
           cd electron
           npm i
           (get-content -encoding utf8 ./js/init.js).replace('giftdouyucdn.starudream.cn', 'gift.douyucdn.cn') | set-content -encoding utf8 ./js/init.js
-          (get-content -encoding utf8 ./js/init.js).replace('maxMessage = 200', 'maxMessage = 2000') | set-content -encoding utf8 ./js/init.js
           (get-content -encoding utf8 ./package.json).replace('1.0.0', $env:GITHUB_REF.SubString(11)) | set-content -encoding utf8 ./package.json
       - name: Pack
         run: npm run pack --prefix ./electron

@@ -9,11 +9,8 @@
             ML = parseInt(_danmu.value);
             GL = parseInt(_gift.value);
             UL = parseInt(_user.value);
+            maxMessage = parseInt(_size.value);
             localStorage.setItem('r', _room.value);
-            _msg.innerHTML = '';
-            _msg1.innerHTML = '';
-            _msg2.innerHTML = '';
-            _msg3.innerHTML = '';
             _start.disabled = true;
             _start.classList.add('layui-btn-disabled');
             _close.disabled = false;
