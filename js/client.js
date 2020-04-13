@@ -56,7 +56,7 @@ function keep() {
 
 function noble(nl) {
     var i = parseInt(nl);
-    if (i >= 1 || i <= 9) {
+    if (i >= 1 && i <= 9) {
         return nobleList[i];
     }
     return '';
