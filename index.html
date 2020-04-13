@@ -28,6 +28,7 @@
             <li class="layui-this">设置</li>
             <li>综合</li>
             <li>弹幕</li>
+            <li>喇叭</li>
             <li>礼物</li>
             <li>进入房间</li>
         </ul>
@@ -102,6 +103,12 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label" for="size">保留消息</label>
+                        <div class="layui-input-block">
+                            <input type="number" class="layui-input" id="size" value="200">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn layui-btn-disabled" id="start" disabled>开始</button>
                             <button class="layui-btn layui-btn-disabled" id="close" disabled>停止</button>
@@ -113,13 +120,16 @@
                 <div class="msg" id="msg"></div>
             </div>
             <div class="layui-tab-item">
-                <div class="msg" id="msg1"></div>
+                <div class="msg" id="msg-chatmsg"></div>
             </div>
             <div class="layui-tab-item">
-                <div class="msg" id="msg2"></div>
+                <div class="msg" id="msg-cthn"></div>
             </div>
             <div class="layui-tab-item">
-                <div class="msg" id="msg3"></div>
+                <div class="msg" id="msg-dgb"></div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg" id="msg-uenter"></div>
             </div>
         </div>
     </div>

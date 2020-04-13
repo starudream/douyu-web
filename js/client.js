@@ -129,7 +129,7 @@ function handle(msg) {
         switch (msg.type) {
             case 'chatmsg':
                 if (ML > -1 && parseInt(msg.level) >= ML) {
-                    addMsg(_msg1, t, msg.nn, msg.level, nl, msg.bnn, msg.bl, '[弹幕] ' + msg.txt);
+                    addMsg(_msg_chat_msg, t, msg.nn, msg.level, nl, msg.bnn, msg.bl, '[弹幕] ' + msg.txt);
                 }
                 break;
             case 'dgb':
@@ -137,25 +137,28 @@ function handle(msg) {
                     gift(msg.gfid, msg.pid, function (g) {
                         if (g.price * parseInt(msg.hits) >= GL * 100) {
                             var txt = '[礼物] ' + g.name + ' ' + msg.gfcnt + ' 个，共 ' + msg.hits + ' 个';
-                            addMsg(_msg2, t, msg.nn, msg.level, nl, msg.bnn, msg.bl, txt);
+                            addMsg(_msg_dgb, t, msg.nn, msg.level, nl, msg.bnn, msg.bl, txt);
                         }
                     });
                 }
                 break;
             case 'uenter':
                 if (UL > -1 && parseInt(msg.level) >= UL) {
-                    addMsg(_msg3, t, msg.nn, msg.level, nl, null, null, '[进入房间]');
+                    addMsg(_msg_uenter, t, msg.nn, msg.level, nl, null, null, '[进入房间]');
                 }
                 break;
             case 'anbc':
                 if (parseInt(msg.drid) === R) {
-                    addMsg(_msg2, t, msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
+                    addMsg(_msg_dgb, t, msg.unk, msg.level, nl, null, null, '[开通爵位] ' + nl);
                 }
                 break;
             case 'rnewbc':
                 if (parseInt(msg.drid) === R) {
-                    addMsg(_msg2, t, msg.unk, msg.level, nl, null, null, '[续费爵位] ' + nl);
+                    addMsg(_msg_dgb, t, msg.unk, msg.level, nl, null, null, '[续费爵位] ' + nl);
                 }
+                break;
+            case 'cthn':
+                addMsg(_msg_cthn, t, msg.unk, null, nl, null, null, '[喇叭] {' + msg.onk + '} ' + msg.chatmsg);
                 break;
             default:
                 break;
