@@ -1,8 +1,8 @@
 # DouYu Web
 
-[![Electron](https://github.com/starudream/douyu-web/workflows/Electron/badge.svg)](https://github.com/starudream/douyu-web/actions?query=workflow%3AElectron)
-[![Cordova](https://github.com/starudream/douyu-web/workflows/Cordova/badge.svg)](https://github.com/starudream/douyu-web/actions?query=workflow%3ACordova)
-[![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](./LICENSE)
+![Electron](https://github.com/starudream/douyu-web/workflows/Electron/badge.svg)
+![Cordova](https://github.com/starudream/douyu-web/workflows/Cordova/badge.svg)
+![License](https://img.shields.io/badge/License-Apache%20License%202.0-blue)
 
 ## Feature
 
