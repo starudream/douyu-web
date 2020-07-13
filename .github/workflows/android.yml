@@ -1,4 +1,4 @@
-name: Cordova
+name: Android
 on:
   push:
     tags:

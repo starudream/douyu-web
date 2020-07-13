@@ -1,4 +1,4 @@
-name: Electron
+name: Windows
 on:
   push:
     tags:

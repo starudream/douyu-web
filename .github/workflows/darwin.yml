@@ -1,0 +1,30 @@
+name: Darwin
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: PrePack
+        run: |
+          mkdir -p ./electron
+          cp -r ./css ./js ./layui ./index.html ./LICENSE ./.electron/* ./electron
+          cp -r ./favicon.ico ./electron/icon.ico
+          cd electron
+          npm i
+          sed -i '' 's|giftdouyucdn.starudream.cn|gift.douyucdn.cn|g' ./js/init.js
+          sed -i '' 's|1.0.0|'${GITHUB_REF:11}'|g' ./package.json
+      - name: Pack
+        run: npm run pack --prefix ./electron
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: electron
+          path: ./electron/build
